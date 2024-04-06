@@ -7,7 +7,15 @@ import (
 )
 
 var cafeList = map[string][]string{
-	"moscow": []string{"Мир кофе", "Сладкоежка", "Кофе и завтраки", "Сытый студент"},
+	"moscow": {"Мир кофе", "Сладкоежка", "Кофе и завтраки", "Сытый студент"},
+}
+
+func main() {
+	http.HandleFunc(`/cafe`, mainHandle)
+	err := http.ListenAndServe(":8083", nil)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func mainHandle(w http.ResponseWriter, req *http.Request) {
